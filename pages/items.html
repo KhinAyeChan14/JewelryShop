@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Items Page</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".cartButton").click(function(){
+				var item_id=$(this).data('id');
+				var item_name=$(this).data('name');
+				var item_price=$(this).data('price');
+				var item_photo=$(this).data('photo');
+
+				var item={
+					id:item_id,
+					name:item_name,
+					price:item_price,
+					photo:item_photo,
+					qty:1,
+				}
+
+				var itemList=localStorage.getItem("item");
+				var itemArray;
+
+				if(itemList==null){
+					itemArray=[]
+				}
+				else{
+					itemArray=JSON.parse(itemList);
+					
+				}
+
+				var status=true;
+
+				itemArray.forEach(function(v,i){
+					if(v.id==item_id){
+						v.qty++;
+						status=false;
+					}
+				})
+
+				if(status){
+					itemArray.push(item);
+				}
+				
+				stringItem=JSON.stringify(itemArray);
+				localStorage.setItem("item",stringItem);
+
+				window.location.href='cart.html';
+		})
+		})
+		
+	</script>
+</head>
+<body>
+	<center><img src="../images/name.jpg" width="200" height="200"></center>
+		<center>
+			<a href="../index.html" >HOME</a>&nbsp;&nbsp;
+			<a href="about.html">ABOUT US</a>&nbsp;&nbsp;
+			<a href="items.html">ITEMS</a>&nbsp;&nbsp;
+			<a href="contact.html">CONTACT</a>&nbsp;&nbsp;
+		</center>
+		<br>
+		
+		<div style="margin-left: 70px; margin-right: 70px">
+			<h3 align="center">Necklaces</h3>
+			<div style="display: inline-block;margin-right: 15px">
+			<center>
+				<img src="../images/necklace5.png">
+				<p>Blue Moon & Heart Necklace</p>
+				<p>$115.00</p>
+				<button style="height: 30px" class="cartButton" data-id="1" data-name="Blue Moon & Heart Necklace" data-price="115" data-photo="../images/necklace5.png">ADD TO CART</button>
+			</center>
+			</div>
+			<div style="display: inline-block;margin-right: 15px">
+			<center>
+				<img src="../images/necklace4.png">
+				<p>Heart and Angel Wings Necklace</p>
+				<p>$115.00</p>
+				<button style="height: 30px" class="cartButton" data-id="2" data-name="Heart and Angel Wings Necklace" data-price="115" data-photo="../images/necklace4.png">ADD TO CART</button>
+			</center>
+			</div>
+		
+			<div style="display: inline-block;margin-right: 15px">
+			<center>
+				<img src="../images/necklace3.png">
+				<p>Infinity Collier Necklace</p>
+				<p>$75.00</p>
+				<button style="height: 30px" class="cartButton" data-id="3" data-name="Infinity Collier Necklace" data-price="75" data-photo="../images/necklace3.png">ADD TO CART</button>
+			</center>
+			</div>
+			<div style="display: inline-block;margin-right: 15px">
+			<center>
+				<img src="../images/necklace2.png">
+				<p>Daisy Flower Collier Necklace</p>
+				<p>$90.00</p>
+				<button style="height: 30px" class="cartButton" data-id="4" data-name="Daisy Flower Collier Necklace" data-price="90" data-photo="../images/necklace2.png">ADD TO CART</button>
+			</center>
+			</div>
+			<div style="display: inline-block;margin-right: 15px">
+			<center>
+				<img src="../images/necklace1.png">
+				<p>Crown & Hearts Necklace</p>
+				<p>$90.00</p>
+				<button style="height: 30px" class="cartButton" data-id="5" data-name="Crown & Hearts Necklace" data-price="90" data-photo="../images/necklace1.png">ADD TO CART</button>
+			</center>
+			</div>
+		</div>
+		<br><br>
+
+		<div style="margin-left: 70px; margin-right: 70px">
+			<h3 align="center">Bracelets</h3>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/bracelet5.jpg">
+				<p>Infinity Knot Bangle</p>
+				<p>$75.00</p>
+				<button style="height: 30px" class="cartButton" data-id="6" data-name="Infinity Knot Bangle" data-price="75" data-photo="../images/bracelet5.jpg">ADD TO CART</button>
+			</center>
+			</div>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/bracelet4.jpg">
+				<p>Sparkling Slider Tennis Bracelet</p>
+				<p>$65.00</p>
+				<button style="height: 30px" class="cartButton" data-id="7" data-name="Sparkling Slider Tennis Bracelet" data-price="65" data-photo="../images/bracelet4.jpg">ADD TO CART</button>
+			</center>
+			</div>
+		
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/bracelet3.jpg">
+				<p>Sparkling Clasp Bracelet</p>
+				<p>$75.00</p>
+				<button style="height: 30px" class="cartButton" data-id="8" data-name="Sparkling Clasp Bracelet" data-price="75" data-photo="../images/bracelet3.jpg">ADD TO CART</button>
+			</center>
+			</div>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/bracelet2.jpg">
+				<p>Tiara Wishbone Open Bangle</p>
+				<p>$90.00</p>
+				<button style="height: 30px" class="cartButton" data-id="9" data-name="Tiara Wishbone Open Bangle" data-price="90" data-photo="../images/bracelet2.jpg">ADD TO CART</button></center>
+			</div>
+			<div style="display: inline-block;">
+			<center>
+				<img src="../images/bracelet1.jpg">
+				<p>Sparkling Pavé Bars Bracelet</p>
+				<p>$100.00</p>
+				<button style="height: 30px" class="cartButton" data-id="10" data-name="Sparkling Pavé Bars Bracelet" data-price="100" data-photo="../images/bracelet1.jpg">ADD TO CART</button></center>
+			</div>
+		</div>
+		<br><br>
+
+		<div style="margin-left: 70px; margin-right: 70px">
+			<h3 align="center">Earrings</h3>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/earrings3.jpg">
+				<p>Asymmetrical Heart Hoop Earrings</p>
+				<p>$45.00</p>
+				<button style="height: 30px" class="cartButton" data-id="11" data-name="Asymmetrical Heart Hoop Earrings" data-price="45" data-photo="../images/earrings3.jpg">ADD TO CART</button></center>
+			</div>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/earrings4.png">
+				<p>Heart Swirl Stud Earrings</p>
+				<p>$55.00</p>
+				<button style="height: 30px" class="cartButton" data-id="12" data-name="Heart Swirl Stud Earrings" data-price="55" data-photo="../images/earrings4.jpg">ADD TO CART</button></center>
+			</div>
+		
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/earrings3.png">
+				<p>Daisy Flower Trio Earrings</p>
+				<p>$55.00</p>
+				<button style="height: 30px" class="cartButton" data-id="13" data-name="Daisy Flower Trio Earrings" data-price="55" data-photo="../images/earrings3.png">ADD TO CART</button></center>
+			</div>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/earrings2.png">
+				<p>Sparkling Butterfly Earrings</p>
+				<p>$65.00</p>
+				<button style="height: 30px" class="cartButton" data-id="14" data-name="Sparkling Butterfly Earrings"  data-price="45" data-photo="../images/earrings2.png">ADD TO CART</button></center>
+			</div>
+			<div style="display: inline-block;">
+			<center>
+				<img src="../images/earrings1.png">
+				<p>Pavé Heart Hoop Earrings</p>
+				<p>$90.00</p>
+				<button style="height: 30px" class="cartButton" data-id="15" data-name="Pavé Heart Hoop Earrings" data-price="90" data-photo="../images/earrings1.png">ADD TO CART</button></center>
+			</div>
+		</div>
+		<br><br>
+
+		<div style="margin-left: 70px; margin-right: 70px">
+			<h3 align="center">Rings</h3>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/ring5.png">
+				<p>Sparkling Snowflake Double Ring</p>
+				<p>$100.00</p>
+				<button style="height: 30px" class="cartButton" data-id="16" data-name="Sparkling Snowflake Double Ring" data-price="100" data-photo="../images/ring5.png">ADD TO CART</button></center>
+			</div>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/ring4.png">
+				<p>Sparkling Dragonfly Open Ring</p>
+				<p>$75.00</p>
+				<button style="height: 30px" class="cartButton" data-id="17" data-name="Sparkling Dragonfly Open Ring" data-price="75" data-photo="../images/rings4.png">ADD TO CART</button></center>
+			</div>
+		
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/ring3.png">
+				<p>Sparkling Crown Solitaire Ring</p>
+				<p>$75.00</p>
+				<button style="height: 30px" class="cartButton" data-id="18" data-name="Sparkling Crown Solitaire Ring" data-price="75" data-photo="../images/ring3.png">ADD TO CART</button></center>
+			</div>
+			<div style="display: inline-block; margin-right: 15px">
+			<center>
+				<img src="../images/ring2.png">
+				<p>Daisy Flower Crown Ring</p>
+				<p>$90.00</p>
+				<button style="height: 30px" class="cartButton" data-id="19" data-name="Daisy Flower Crown Ring" data-price="90" data-photo="../images/ring2.png">ADD TO CART</button></center>
+			</div>
+			<div style="display: inline-block;">
+			<center>
+				<img src="../images/ring1.png">
+				<p>Knotted Heart Ring</p>
+				<p>$75.00</p>
+				<button style="height: 30px" class="cartButton" data-id="20" data-name="Knotted Heart Ring" data-price="75" data-photo="../images/ring1.png">ADD TO CART</button></center>
+			</div>
+		</div>
+		<br><br>
+
+</body>
+</html>

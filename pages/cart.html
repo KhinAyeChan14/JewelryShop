@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Your Cart</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<style type="text/css">
+		.cartClass{
+			text-align: center;
+		}
+
+		h1{
+			display: inline;
+			margin-right: 30px;
+			vertical-align: middle;
+		}
+		.cartimg {
+			width: 50px;
+			height: 50px;
+			vertical-align: middle;
+		}
+
+		#count{
+			position: absolute;
+			font-size: 20px;
+		}
+		table{
+			text-align: center;
+		}
+
+
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			showItem();
+			itemCount();
+		
+
+		function showItem(){
+			itemList=localStorage.getItem("item");
+			if(itemList){
+				itemArray=JSON.parse(itemList);
+				var html="";
+				var number=0;
+				var total=0;
+				var subtotal=0;
+
+				itemArray.forEach(function(v,i){
+					number+=1;
+					total=parseInt(v.price*v.qty);
+					subtotal+=total;
+					// console.log(total);
+					html+=`<tr><td width="50px">${number}</td>
+							<td width="400px"><img src="${v.photo}" width="180px" height="150px" style="float:left;">
+							<p align="center">${v.name}</p>
+							<td width="150px">$${v.price}</td>
+							<td width="150px"><button class="btnIncrease" data-id="${i}">&nbsp;+&nbsp;</button>&nbsp;&nbsp;${v.qty}&nbsp;&nbsp;<button class="btnDecrease" data-id="${i}">&nbsp;-&nbsp;&nbsp;</button></td>
+							<td width="150px">$${total}</td>
+							</tr>`
+ 
+				});
+				
+				html+=`<tr><td colspan=4>Subtotal</td>
+				<td>$${subtotal}</td></tr>`
+				$('tbody').html(html);
+			}
+		}
+
+		function itemCount(){
+			var totalItem=0;
+			var itemList=localStorage.getItem("item");
+			if(itemList){
+				itemArray=JSON.parse(itemList);
+				itemArray.forEach(function(v,i){
+					totalItem+=v.qty;
+				});
+
+				console.log(totalItem);
+				$("#count").html(totalItem);
+			}
+		}
+
+		$("tbody").on('click','.btnIncrease',function(){
+			var id=$(this).data('id');
+
+			var itemList=localStorage.getItem("item");
+			if(itemList){
+				var itemArray=JSON.parse(itemList);
+
+				itemArray.forEach( function(v, i) {
+
+					if(i==id){
+						v.qty++;
+					}
+				});
+
+			var itemstring=JSON.stringify(itemArray);
+			localStorage.setItem("item",itemstring);
+			showItem();
+			itemCount();
+			}
+		})
+
+
+		$("tbody").on('click','.btnDecrease',function(){
+
+			var id=$(this).data('id');
+
+			var itemList=localStorage.getItem("item");
+			if(itemList){
+				var itemArray=JSON.parse(itemList);
+
+				itemArray.forEach( function(v, i) {
+
+					if(i==id){
+						v.qty--;
+						if(v.qty==0){
+							itemArray.splice(id, 1);
+						}
+					}
+				});
+			var itemstring=JSON.stringify(itemArray);
+			localStorage.setItem("item",itemstring);
+			showItem();
+			itemCount();
+			}
+		})
+
+		$(".checkout").click(function(){
+			// alert("OK");
+			var html=`<h3>Thank you for shoppping.</h3>`
+			localStorage.clear();
+			itemCount();
+			$('.cartClass').html(html);
+
+		})
+})
+	</script>
+</head>
+<body>
+	<center><img src="../images/name.jpg" width="200" height="200"></center>
+
+	<center>
+		<a href="../index.html" >HOME</a>&nbsp;&nbsp;
+		<a href="about.html">ABOUT US</a>&nbsp;&nbsp;
+		<a href="items.html">ITEMS</a>&nbsp;&nbsp;
+		<a href="contact.html">CONTACT</a>&nbsp;&nbsp;
+	</center>
+	<br><br><br>
+
+	<div class="cartClass">
+		<h1>Your Shopping Cart</h1>
+		<img class="cartimg" src="../images/cart.png" >
+		<span id="count">3</span>
+		<br><br><br>
+		<center>
+			<table border="1px solid grey" cellspacing="0" cellpadding="5px">
+				<thead>
+					<th>No</th>
+					<th>Product</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Total</th>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</center>
+		
+		<br><br>
+		<center><button class="checkout">CHECK OUT</button></center>	
+	</div>
+	
+</body>
